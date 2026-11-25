@@ -1,6 +1,7 @@
 # Site estático servido por nginx
 FROM nginx:1.27-alpine
 COPY index.html /usr/share/nginx/html/
+COPY assets/ /usr/share/nginx/html/assets/
 COPY blog/ /usr/share/nginx/html/blog/
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=3s CMD wget -qO- http://localhost/ >/dev/null 2>&1 || exit 1
