@@ -5,224 +5,282 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>nfchat — Cobrança recorrente no automático</title>
 <meta name="description" content="Gestão de contratos, cobrança recorrente e nota fiscal num só lugar. Receba por boleto, Pix ou cartão, integrado aos principais bancos e gateways (Asaas, Cielo, GetNet). Comece grátis em 2 minutos, sem cartão.">
+<meta name="theme-color" content="#FC6901">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --brand:#4f46e5; --brand-2:#7c3aed; --ink:#0f172a; --muted:#64748b;
-    --bg:#ffffff; --soft:#f6f7fb; --line:#e7e9f2; --ok:#16a34a; --radius:16px;
-    --shadow:0 10px 30px rgba(15,23,42,.08);
-  }
-  *{box-sizing:border-box} html{scroll-behavior:smooth}
-  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-  .btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font-weight:600;font-size:15px;padding:13px 22px;border-radius:12px;transition:.2s;white-space:nowrap}
-  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 8px 20px rgba(79,70,229,.35)}
-  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(79,70,229,.45)}
-  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
-  /* nav */
-  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-  .logo{font-weight:800;font-size:20px;letter-spacing:-.5px}
-  .logo span{color:var(--brand)}
-  .nav-links{display:flex;gap:28px;align-items:center}
-  .nav-links a{color:var(--muted);font-weight:500;font-size:15px}
-  .nav-links a:hover{color:var(--ink)}
-  .nav-cta{display:flex;gap:10px;align-items:center}
-  .burger{display:none;background:none;border:0;font-size:26px;cursor:pointer}
-  /* hero */
-  .hero{padding:84px 0 60px;background:radial-gradient(1200px 500px at 70% -10%,#eef0ff,transparent),var(--bg)}
-  .hero h1{font-size:clamp(34px,5vw,56px);line-height:1.08;letter-spacing:-1.5px;margin:0 0 18px;font-weight:800}
-  .hero p.sub{font-size:19px;color:var(--muted);max-width:620px;margin:0 0 28px}
-  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .microcopy{color:var(--muted);font-size:14px;margin-top:14px}
-  .microcopy b{color:var(--ink)}
-  .badge{display:inline-flex;gap:8px;align-items:center;background:#eef0ff;color:var(--brand);font-weight:600;font-size:13px;padding:7px 14px;border-radius:999px;margin-bottom:22px}
-  /* sections */
-  section{padding:72px 0}
-  .eyebrow{color:var(--brand);font-weight:700;letter-spacing:.6px;text-transform:uppercase;font-size:13px;margin:0 0 10px}
-  h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-1px;margin:0 0 14px;font-weight:800}
-  .lead{color:var(--muted);font-size:18px;max-width:640px;margin:0 0 44px}
-  .soft{background:var(--soft)}
-  .grid{display:grid;gap:22px}
-  .g3{grid-template-columns:repeat(3,1fr)}
-  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-  .step .n{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px}
-  .card h3{margin:0 0 8px;font-size:19px}
-  .card p{margin:0;color:var(--muted)}
-  .feat{display:flex;gap:14px;align-items:flex-start}
-  .feat .ic{font-size:22px;line-height:1.2}
-  /* pricing */
-  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
-  .plan{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;position:relative}
-  .plan.pop{border:2px solid var(--brand);box-shadow:var(--shadow)}
-  .plan .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--brand);color:#fff;font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px}
-  .plan h3{margin:0 0 4px;font-size:20px}
-  .plan .price{font-size:40px;font-weight:800;letter-spacing:-1.5px;margin:10px 0 2px}
-  .plan .price small{font-size:15px;font-weight:600;color:var(--muted)}
-  .plan .note{color:var(--muted);font-size:14px;min-height:20px}
-  .plan ul{list-style:none;padding:0;margin:20px 0 26px;display:grid;gap:11px}
-  .plan li{display:flex;gap:10px;color:#334155;font-size:15px}
-  .plan li::before{content:"✓";color:var(--ok);font-weight:800}
-  .plan .btn{width:100%;justify-content:center;margin-top:auto}
-  .trial-note{text-align:center;color:var(--muted);font-size:14px;margin-top:22px}
-  /* faq */
-  .faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px 20px;margin-bottom:12px}
-  .faq summary{cursor:pointer;font-weight:600;padding:16px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
-  .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:"+";color:var(--brand);font-size:22px;font-weight:700}
-  .faq details[open] summary::after{content:"–"}
-  .faq p{margin:0 0 18px;color:var(--muted)}
-  /* cta band */
-  .band{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border-radius:24px;padding:56px;text-align:center}
-  .band h2{color:#fff}
-  .band p{color:#e7e7ff;font-size:18px;max-width:560px;margin:0 auto 26px}
-  .band .btn-primary{background:#fff;color:var(--brand);box-shadow:0 10px 24px rgba(0,0,0,.18)}
-  /* footer */
-  footer{padding:50px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
-  .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
-  @media(max-width:820px){
-    .nav-links{display:none} .burger{display:block}
-    .g3,.plans{grid-template-columns:1fr}
-    .band{padding:40px 24px}
-    header nav .nav-cta .btn-ghost{display:none}
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <nav>
-      <div class="logo">nf<span>chat</span></div>
-      <div class="nav-links">
-        <a href="#como">Como funciona</a>
-        <a href="#beneficios">Benefícios</a>
-        <a href="#recuperacao">Recuperação</a>
-        <a href="#planos">Planos</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      <div class="nav-cta">
-        <a class="btn btn-ghost" href="#planos">Ver planos</a>
-        <a class="btn btn-primary" href="#planos">Começar grátis</a>
-      </div>
-      <button class="burger" aria-label="menu" onclick="document.querySelector('.nav-links').style.display='flex';this.style.display='none'">☰</button>
+
+<!-- ícones reutilizados -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 013-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 01-3 3H3"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18M7 15h3"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16 4.6a3.5 3.5 0 010 6.8M18 14.5a6.5 6.5 0 013.5 5.5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M8 15l4-4 3 3 5-6"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.3-2 5-2 5s3.700-.5 5-2"/><path d="M9 15l-1-1a13 13 0 015-9c2.500-2 6-2 8-2 0 2 0 5.500-2 8a13 13 0 01-9 5z"/><circle cx="15" cy="9" r="1.6"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 01-12 0zM12 18v4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.500 8.500 0 01-12.600 7.400L3 21l1.600-5.400A8.500 8.500 0 1121 12z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="./" aria-label="nfchat — início">nf<b>chat</b></a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#beneficios">Plataforma</a>
+      <a href="#como">Como funciona</a>
+      <a href="#recuperacao">Recuperação</a>
+      <a href="#planos">Planos</a>
+      <a href="blog/">Blog</a>
     </nav>
+    <div class="nav-right">
+      <a class="btn btn-primary btn-sm" href="#planos">Começar grátis</a>
+      <button class="burger" aria-label="Abrir menu" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+    </div>
   </div>
+  <nav class="drawer" aria-label="Menu móvel">
+    <a href="#beneficios">Plataforma</a>
+    <a href="#como">Como funciona</a>
+    <a href="#recuperacao">Recuperação</a>
+    <a href="#planos">Planos</a>
+    <a href="blog/">Blog</a>
+    <a href="#faq">Dúvidas</a>
+  </nav>
 </header>
 
 <main>
-  <section class="hero">
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-ghost" aria-hidden="true">Recorrência</div>
     <div class="wrap">
-      <span class="badge">● Teste grátis por 3 dias — sem cartão</span>
-      <h1>Pare de correr atrás de pagamento.<br>Automatize a cobrança dos seus clientes.</h1>
-      <p class="sub">Contratos, cobrança recorrente e nota fiscal num só lugar. Comece grátis em 2 minutos e receba no automático — boleto, Pix ou cartão, integrado às principais instituições bancárias e gateways (Asaas, Cielo, GetNet).</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#planos">Começar teste grátis →</a>
-        <a class="btn btn-ghost" href="#como">Ver como funciona</a>
+      <div class="hero-grid">
+        <div>
+          <p class="hero-kicker">Teste grátis por 3 dias — sem cartão</p>
+          <h1 class="display">Pare de correr atrás de pagamento. <em>Cobre no automático.</em></h1>
+          <p class="sub">Contratos, cobrança recorrente e nota fiscal num só lugar. Comece grátis em 2 minutos e receba por boleto, Pix ou cartão, integrado às principais instituições bancárias e gateways (Asaas, Cielo, GetNet).</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#planos">Começar teste grátis <svg><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-text" href="#como">Ver como funciona</a>
+          </div>
+          <p class="microcopy">Sem cartão. Sem compromisso. <b>Até 10 contratos no teste.</b></p>
+        </div>
+        <div class="orbit" aria-hidden="true">
+          <div class="orbit-core"><svg><use href="#i-repeat"/></svg></div>
+          <span class="pill p1"><i class="i-ok"><svg><use href="#i-check"/></svg></i>Boleto pago</span>
+          <span class="pill p2"><i class="i-orange"><svg><use href="#i-receipt"/></svg></i>Nota fiscal emitida</span>
+          <span class="pill p3"><i class="i-info"><svg><use href="#i-card"/></svg></i>Cartão renovado</span>
+          <span class="pill p4"><i class="i-warn"><svg><use href="#i-chat"/></svg></i>Lembrete enviado</span>
+        </div>
       </div>
-      <p class="microcopy">Sem cartão. Sem compromisso. <b>Até 10 contratos no teste.</b></p>
+
+      <div class="hero-stage" aria-hidden="true">
+        <div class="mock">
+          <div class="mock-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><strong>nfchat</strong> · Cobranças do mês</div>
+          <div class="mock-body">
+            <div class="mock-list">
+              <div class="mock-row"><span class="av">AM</span><span class="who"><b>Academia Movimento</b><small>Plano mensal · cartão recorrente</small></span><span class="val">R$ 289,00</span><span class="chip ok">Pago</span></div>
+              <div class="mock-row"><span class="av">CL</span><span class="who"><b>Clínica Luz</b><small>Contrato anual · boleto</small></span><span class="val">R$ 1.240,00</span><span class="chip nf">NF emitida</span></div>
+              <div class="mock-row"><span class="av">TS</span><span class="who"><b>TechSul Provedor</b><small>Plano 500 Mb · Pix</small></span><span class="val">R$ 119,90</span><span class="chip sent">Enviado</span></div>
+              <div class="mock-row"><span class="av">EC</span><span class="who"><b>Escola Criar</b><small>Mensalidade · lembrete enviado</small></span><span class="val">R$ 640,00</span><span class="chip late">Em atraso</span></div>
+            </div>
+            <div class="mock-side">
+              <div class="mock-stat"><small>Recebido no mês</small><b>R$ 48,2 mil</b></div>
+              <div class="mock-stat"><small>Cobranças enviadas</small><b>312</b></div>
+              <div class="mock-stat"><small>Em atraso</small><b>7</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="como" class="soft">
+  <!-- INSIGHT -->
+  <section class="theme-orange insight">
     <div class="wrap">
-      <p class="eyebrow">Como funciona</p>
-      <h2>Do cadastro à primeira cobrança em minutos</h2>
-      <p class="lead">Fluxo 100% self-service. Você não depende de ninguém para começar a receber.</p>
-      <div class="grid g3">
-        <div class="card step"><div class="n">1</div><h3>Comece o teste grátis</h3><p>Crie sua conta em 2 minutos — 3 dias e até 10 contratos, sem cartão.</p></div>
-        <div class="card step"><div class="n">2</div><h3>Conecte seu gateway</h3><p>Ligue seu gateway (Asaas, Cielo, GetNet) ou banco e importe seus clientes e contratos.</p></div>
-        <div class="card step"><div class="n">3</div><h3>Receba no automático</h3><p>As cobranças saem sozinhas por boleto ou cartão. Gostou? Assine em 1 clique.</p></div>
-      </div>
+      <h2 class="section-title reveal">O problema não é o cliente.<br>É a cobrança feita na mão.</h2>
+      <p class="reveal">Planilha de vencimentos, boleto gerado um a um, lembrete copiado e colado, nota fiscal no fim do mês. Quando a base cresce, o que era rotina vira atraso. O nfchat tira isso da sua mão.</p>
     </div>
   </section>
 
+  <!-- PLATAFORMA -->
   <section id="beneficios">
     <div class="wrap">
-      <p class="eyebrow">Benefícios</p>
-      <h2>Tudo da receita recorrente, integrado</h2>
-      <p class="lead">Feito para qualquer empresa que cobra todo mês — e quer parar de fazer isso na mão.</p>
+      <div class="section-head">
+        <p class="eyebrow reveal">A plataforma</p>
+        <h2 class="section-title reveal">Tudo da receita recorrente, integrado.</h2>
+        <p class="lead reveal">Feito para qualquer empresa que cobra todo mês — e quer parar de fazer isso na mão.</p>
+      </div>
       <div class="grid g3">
-        <div class="card feat"><div class="ic">🔁</div><div><h3>Cobrança recorrente</h3><p>Boleto e cartão automáticos, com régua de cobrança e lembretes.</p></div></div>
-        <div class="card feat"><div class="ic">📄</div><div><h3>Contratos e planos</h3><p>Planos flexíveis e cobrança por uso (contratos adicionais).</p></div></div>
-        <div class="card feat"><div class="ic">🧾</div><div><h3>Nota fiscal integrada</h3><p>Emissão de NF ligada à cobrança, sem retrabalho.</p></div></div>
-        <div class="card feat"><div class="ic">💳</div><div><h3>Bancos e gateways</h3><p>Integramos com as principais instituições bancárias e gateways — Asaas, Cielo, GetNet. O dinheiro cai na sua conta.</p></div></div>
-        <div class="card feat"><div class="ic">🤝</div><div><h3>Portal do vendedor</h3><p>Link de indicação e controle de comissões por vendedor.</p></div></div>
-        <div class="card feat"><div class="ic">📊</div><div><h3>Projeção e copiloto</h3><p>Dashboard de receita futura, churn e insights de crescimento.</p></div></div>
+        <div class="card reveal"><div class="ic"><svg><use href="#i-repeat"/></svg></div><h3>Cobrança recorrente</h3><p>Boleto e cartão automáticos, com régua de cobrança e lembretes.</p></div>
+        <div class="card reveal"><div class="ic"><svg><use href="#i-doc"/></svg></div><h3>Contratos e planos</h3><p>Planos flexíveis e cobrança por uso (contratos adicionais).</p></div>
+        <div class="card reveal"><div class="ic"><svg><use href="#i-receipt"/></svg></div><h3>Nota fiscal integrada</h3><p>Emissão de NF ligada à cobrança, sem retrabalho.</p></div>
+        <div class="card reveal"><div class="ic"><svg><use href="#i-card"/></svg></div><h3>Bancos e gateways</h3><p>Integramos com as principais instituições bancárias e gateways. O dinheiro cai na sua conta.</p></div>
+        <div class="card reveal"><div class="ic"><svg><use href="#i-users"/></svg></div><h3>Portal do vendedor</h3><p>Link de indicação e controle de comissões por vendedor.</p></div>
+        <div class="card reveal"><div class="ic"><svg><use href="#i-chart"/></svg></div><h3>Projeção e copiloto</h3><p>Dashboard de receita futura, churn e insights de crescimento.</p></div>
+      </div>
+      <div class="gateways reveal">Receba com a sua própria conta: <span class="tag">Asaas</span><span class="tag">Cielo</span><span class="tag">GetNet</span><span class="tag">Boleto</span><span class="tag">Pix</span><span class="tag">Cartão</span></div>
+    </div>
+  </section>
+
+  <!-- NÚMEROS -->
+  <section class="theme-soft">
+    <div class="wrap stats">
+      <div>
+        <p class="eyebrow reveal">Sem barreira para começar</p>
+        <h2 class="section-title reveal">Teste antes de pagar.</h2>
+        <p class="lead reveal">Você cria a conta sozinho, cadastra seus primeiros contratos e vê a cobrança saindo — antes de escolher um plano.</p>
+      </div>
+      <div class="stat-cards">
+        <div class="stat s-orange reveal"><small>cadastro</small><b>2 min</b><p>para criar sua conta. Fluxo 100% self-service.</p></div>
+        <div class="stat s-dark reveal"><small>teste grátis</small><b>3 dias</b><p>sem cartão. Nada é cobrado sem você assinar.</p></div>
+        <div class="stat s-white reveal"><small>no teste</small><b>10</b><p>contratos para validar cobrança, pagamento e nota fiscal.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="recuperacao">
+  <!-- COMO FUNCIONA -->
+  <section id="como">
     <div class="wrap">
-      <p class="eyebrow">Produto à parte</p>
-      <h2>Recuperação de crédito 100% WhatsApp</h2>
-      <p class="lead">Transforme inadimplência em caixa. Ative e a plataforma cobra e negocia seus atrasados direto no WhatsApp — você só paga quando recupera.</p>
-      <div class="grid g3">
-        <div class="card feat"><div class="ic">💬</div><div><h3>100% WhatsApp</h3><p>Abordagem automática no canal que o cliente mais responde.</p></div></div>
-        <div class="card feat"><div class="ic">🎯</div><div><h3>Só paga quando recupera</h3><p>Ativação de <strong>R$ 19,90</strong> + <strong>10%</strong> do valor efetivamente recuperado. Sem recuperação, sem custo variável.</p></div></div>
-        <div class="card feat"><div class="ic">⚡</div><div><h3>Ative em 1 clique</h3><p>Add-on dentro do portal, aplicado sobre a sua carteira de atrasados.</p></div></div>
+      <div class="center">
+        <p class="eyebrow reveal">Como funciona</p>
+        <h2 class="section-title reveal">Do cadastro à primeira cobrança em minutos.</h2>
+        <p class="lead reveal">Você não depende de ninguém para começar a receber.</p>
       </div>
-      <div style="margin-top:24px"><a class="btn btn-primary" href="#planos">Ativar recuperação →</a></div>
+      <div class="timeline">
+        <div class="t-item reveal">
+          <div class="t-node"><svg><use href="#i-rocket"/></svg></div>
+          <div class="t-card"><span class="n">01</span><h3>Comece o teste grátis</h3><p>Crie sua conta em 2 minutos — 3 dias e até 10 contratos, sem cartão.</p></div>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-node"><svg><use href="#i-plug"/></svg></div>
+          <div class="t-card"><span class="n">02</span><h3>Conecte seu gateway</h3><p>Ligue seu gateway (Asaas, Cielo, GetNet) ou banco e importe seus clientes e contratos.</p></div>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-node"><svg><use href="#i-repeat"/></svg></div>
+          <div class="t-card"><span class="n">03</span><h3>Receba no automático</h3><p>As cobranças saem sozinhas por boleto ou cartão. Gostou? Assine em 1 clique.</p></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="planos" class="soft">
+  <!-- RECUPERAÇÃO -->
+  <section id="recuperacao" class="theme-dark">
+    <div class="wrap recovery">
+      <div>
+        <p class="eyebrow reveal">Produto à parte</p>
+        <h2 class="section-title reveal">Recuperação de crédito 100% WhatsApp.</h2>
+        <p class="lead reveal">Transforme inadimplência em caixa. Ative e a plataforma cobra e negocia seus atrasados direto no WhatsApp — você só paga quando recupera.</p>
+        <ul class="checks">
+          <li class="reveal"><i><svg><use href="#i-check"/></svg></i><span><b>100% WhatsApp</b>Abordagem automática no canal que o cliente mais responde.</span></li>
+          <li class="reveal"><i><svg><use href="#i-check"/></svg></i><span><b>Só paga quando recupera</b>Sem recuperação, sem custo variável.</span></li>
+          <li class="reveal"><i><svg><use href="#i-check"/></svg></i><span><b>Ative em 1 clique</b>Add-on dentro do portal, aplicado sobre a sua carteira de atrasados.</span></li>
+        </ul>
+        <a class="btn btn-primary reveal" href="#planos">Ativar recuperação <svg><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="reveal">
+        <div class="chat" aria-hidden="true">
+          <div class="chat-head"><i></i>WhatsApp · cobrança automática</div>
+          <div class="bubble out">Olá! Vimos que a mensalidade de outubro ficou em aberto. Quer regularizar agora?</div>
+          <div class="bubble in">Quero sim. Dá para parcelar?</div>
+          <div class="bubble out">Dá. Segue o link com as opções de pagamento — Pix, boleto ou cartão.</div>
+          <div class="bubble in">Paguei no Pix.</div>
+        </div>
+        <div class="price-strip">
+          <div><b>R$ 19,90</b><small>ativação do add-on</small></div>
+          <div><b>10%</b><small>do valor efetivamente recuperado</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos" class="theme-gray">
     <div class="wrap">
-      <p class="eyebrow">Planos</p>
-      <h2>Preço que cresce junto com você</h2>
-      <p class="lead">Comece grátis. Pague só pelo que usar conforme sua base cresce.</p>
+      <div class="section-head center">
+        <p class="eyebrow reveal">Planos</p>
+        <h2 class="section-title reveal">Preço que cresce junto com você.</h2>
+        <p class="lead reveal">Comece grátis. Pague só pelo que usar conforme sua base cresce.</p>
+      </div>
       <div class="plans">
-        <div class="plan">
+        <div class="plan reveal">
           <h3>Essencial</h3>
           <div class="price">R$ 49,90<small>/mês</small></div>
           <div class="note">Para começar</div>
           <ul>
-            <li>Até 100 contratos ativos</li>
-            <li>Contrato adicional: R$ 1,49</li>
-            <li>Cobrança boleto e cartão</li>
-            <li>Nota fiscal integrada</li>
+            <li><svg><use href="#i-check"/></svg>Até 100 contratos ativos</li>
+            <li><svg><use href="#i-check"/></svg>Contrato adicional: R$ 1,49</li>
+            <li><svg><use href="#i-check"/></svg>Cobrança boleto e cartão</li>
+            <li><svg><use href="#i-check"/></svg>Nota fiscal integrada</li>
           </ul>
-          <a class="btn btn-ghost" href="#">Assinar Essencial</a>
+          <a class="btn btn-outline btn-block" href="#">Assinar Essencial</a>
         </div>
-        <div class="plan pop">
+        <div class="plan pop reveal">
           <span class="tag">Mais popular</span>
           <h3>Pro</h3>
           <div class="price">R$ 199,90<small>/mês</small></div>
           <div class="note">Para escalar</div>
           <ul>
-            <li>Até 500 contratos ativos</li>
-            <li>Contrato adicional: R$ 1,19</li>
-            <li>Tudo do Essencial</li>
-            <li>Portal do vendedor + comissões</li>
+            <li><svg><use href="#i-check"/></svg>Até 500 contratos ativos</li>
+            <li><svg><use href="#i-check"/></svg>Contrato adicional: R$ 1,19</li>
+            <li><svg><use href="#i-check"/></svg>Tudo do Essencial</li>
+            <li><svg><use href="#i-check"/></svg>Portal do vendedor + comissões</li>
           </ul>
-          <a class="btn btn-primary" href="#">Assinar Pro</a>
+          <a class="btn btn-primary btn-block" href="#">Assinar Pro</a>
         </div>
-        <div class="plan">
+        <div class="plan reveal">
           <h3>Enterprise</h3>
-          <div class="price">Sob consulta</div>
+          <div class="price small">Sob consulta</div>
           <div class="note">Acima de 500 contratos</div>
           <ul>
-            <li>Volume e franquia negociados</li>
-            <li>Preço de contrato adicional reduzido</li>
-            <li>Suporte dedicado</li>
-            <li>Onboarding assistido</li>
+            <li><svg><use href="#i-check"/></svg>Volume e franquia negociados</li>
+            <li><svg><use href="#i-check"/></svg>Preço de contrato adicional reduzido</li>
+            <li><svg><use href="#i-check"/></svg>Suporte dedicado</li>
+            <li><svg><use href="#i-check"/></svg>Onboarding assistido</li>
           </ul>
-          <a class="btn btn-ghost" href="#contato">Falar com vendas</a>
+          <a class="btn btn-outline btn-block" href="#contato">Falar com vendas</a>
         </div>
       </div>
       <p class="trial-note">Todos começam com <b>3 dias grátis e até 10 contratos</b> — sem cartão. Ao fim, você escolhe um plano para continuar.</p>
     </div>
   </section>
 
+  <!-- BLOG -->
+  <section id="blog-home" class="theme-soft">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow reveal">Blog</p>
+        <h2 class="section-title reveal">Guias de cobrança recorrente.</h2>
+        <p class="lead reveal">Cobrança, nota fiscal e gestão de recebíveis — sem enrolação.</p>
+      </div>
+      <div class="posts">
+        <a class="post reveal" href="blog/posts/2026-11-25-mercado-cobranca-recorrente.html"><div class="date">25 nov 2026</div><h3>Cobrança recorrente: por que a régua manual está custando caro</h3><p>Como a automação de boletos, cartão e nota fiscal reduz inadimplência e libera o time financeiro.</p></a>
+        <a class="post reveal" href="blog/posts/2026-11-22-boleto-pix-cartao-conversao.html"><div class="date">22 nov 2026</div><h3>Boleto, Pix ou cartão: qual converte mais na cobrança recorrente</h3><p>Comparação prática dos três meios de pagamento na recorrência e como combiná-los para converter mais.</p></a>
+        <a class="post reveal" href="blog/posts/2026-11-19-regua-de-cobranca-como-montar.html"><div class="date">19 nov 2026</div><h3>Régua de cobrança: o que é e como montar uma que funciona</h3><p>O passo a passo para montar uma régua de cobrança automática que recupera receita sem esforço manual.</p></a>
+        <a class="post reveal" href="blog/posts/2026-11-16-cartao-recorrente-vs-boleto.html"><div class="date">16 nov 2026</div><h3>Cartão recorrente vs. boleto: prós, contras e quando usar cada um</h3><p>Quando o cartão recorrente faz sentido, quando o boleto ainda vence e como oferecer os dois.</p></a>
+        <a class="post reveal" href="blog/posts/2026-11-13-reduzir-inadimplencia-sem-constranger.html"><div class="date">13 nov 2026</div><h3>Como reduzir a inadimplência sem constranger o cliente</h3><p>Técnicas de cobrança que recuperam pagamentos preservando a relação com o cliente.</p></a>
+        <a class="post reveal" href="blog/posts/2026-11-10-cobranca-automatica-5-erros.html"><div class="date">10 nov 2026</div><h3>Cobrança automática: 5 erros que afastam clientes</h3><p>Os erros mais comuns na automação de cobrança e como evitá-los para não perder clientes.</p></a>
+      </div>
+      <div class="more"><a class="link-arrow" href="blog/">Ver todos os artigos</a></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
   <section id="faq">
-    <div class="wrap" style="max-width:820px">
-      <p class="eyebrow">Dúvidas</p>
-      <h2>Perguntas frequentes</h2>
-      <div class="faq" style="margin-top:30px">
+    <div class="wrap">
+      <div class="center">
+        <p class="eyebrow reveal">Perguntas frequentes</p>
+        <h2 class="section-title reveal">Antes que você pergunte.</h2>
+      </div>
+      <div class="faq">
         <details open><summary>Como funciona o teste grátis?</summary><p>3 dias e até 10 contratos, sem cartão. Ao fim, você escolhe um plano para continuar — nada é cobrado sem você assinar.</p></details>
         <details><summary>Como eu recebo dos meus clientes?</summary><p>Pelos principais gateways e instituições bancárias (Asaas, Cielo, GetNet), com a sua própria conta: boleto, Pix ou cartão. O valor cai direto na sua conta.</p></details>
         <details><summary>Preciso de cartão para começar?</summary><p>Não. O teste não pede cartão; você só informa a forma de pagamento ao assinar.</p></details>
@@ -232,25 +290,53 @@
     </div>
   </section>
 
-  <section id="contato">
+  <!-- CTA -->
+  <section id="contato" style="padding-top:0">
     <div class="wrap">
-      <div class="band">
-        <h2>Comece a receber no automático hoje</h2>
+      <div class="band reveal">
+        <h2 class="section-title">Comece a receber no automático hoje.</h2>
         <p>Crie sua conta grátis em 2 minutos. Sem cartão, sem compromisso.</p>
-        <a class="btn btn-primary" href="#planos">Começar teste grátis →</a>
+        <a class="btn btn-dark" href="#planos">Começar teste grátis <svg><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <div>© <span id="y"></span> nfchat · Cobrança recorrente para empresas</div>
-    <div>Termos · Privacidade · contato@exemplo.com.br</div>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="./">nf<b>chat</b></a>
+        <p>Cobrança recorrente, contratos e nota fiscal para empresas que cobram todo mês.</p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#beneficios">Plataforma</a></li>
+          <li><a href="#como">Como funciona</a></li>
+          <li><a href="#recuperacao">Recuperação</a></li>
+          <li><a href="#planos">Planos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Conteúdo</h4>
+        <ul>
+          <li><a href="blog/">Blog</a></li>
+          <li><a href="#faq">Perguntas frequentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Empresa</h4>
+        <ul>
+          <li>Termos</li>
+          <li>Privacidade</li>
+          <li>contato@exemplo.com.br</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© <span id="y"></span> nfchat · Cobrança recorrente para empresas</span></div>
   </div>
 </footer>
-<script>
-  document.getElementById('y').textContent=new Date().getFullYear();
-</script>
+<script src="assets/site.js"></script>
 </body>
 </html>

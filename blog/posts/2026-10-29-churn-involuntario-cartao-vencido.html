@@ -5,27 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Churn involuntário: o cliente que sai só porque o cartão venceu — nfchat</title>
 <meta name="description" content="Como o churn involuntário corrói a receita e o que fazer para recuperar cartões vencidos.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{--brand:#4f46e5;--ink:#0f172a;--muted:#64748b;--line:#e7e9f2}
-  *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);line-height:1.7}
-  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
-  header{border-bottom:1px solid var(--line)}nav{display:flex;justify-content:space-between;align-items:center;height:66px}
-  .logo{font-weight:800;font-size:20px}.logo span{color:var(--brand)}a{color:inherit;text-decoration:none}
-  .date{color:var(--brand);font-weight:600;font-size:13px;margin-top:40px}
-  h1{font-size:34px;letter-spacing:-1px;margin:8px 0 10px;line-height:1.15}
-  h2{font-size:22px;margin:34px 0 8px}
-  p{margin:0 0 16px}article{padding-bottom:40px}
-  .cta{display:inline-block;background:var(--brand);color:#fff;font-weight:600;padding:12px 22px;border-radius:12px;margin-top:10px}
-  footer{color:var(--muted);font-size:14px;padding:30px 0;border-top:1px solid var(--line)}
-</style>
+<meta name="theme-color" content="#FC6901">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-<header><div class="wrap"><nav><a class="logo" href="/">nf<span>chat</span></a><a href="/blog/">← Blog</a></nav></div></header>
-<main class="wrap">
-  <article>
-    <div class="date">29 de outubro de 2026</div>
-    <h1>Churn involuntário: o cliente que sai só porque o cartão venceu</h1>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="../../" aria-label="nfchat — início">nf<b>chat</b></a>
+    <nav class="menu" aria-label="Principal">
+      <a href="../../#beneficios">Plataforma</a>
+      <a href="../../#como">Como funciona</a>
+      <a href="../../#recuperacao">Recuperação</a>
+      <a href="../../#planos">Planos</a>
+      <a href="../" aria-current="page">Blog</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-primary btn-sm" href="../../#planos">Começar grátis</a>
+      <button class="burger" aria-label="Abrir menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="drawer" aria-label="Menu móvel">
+    <a href="../../#beneficios">Plataforma</a>
+    <a href="../../#como">Como funciona</a>
+    <a href="../../#recuperacao">Recuperação</a>
+    <a href="../../#planos">Planos</a>
+    <a href="../">Blog</a>
+  </nav>
+</header>
+<main>
+  <div class="article-head">
+    <div class="wrap-narrow">
+      <a class="back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Blog</a>
+      <div class="date">29 de outubro de 2026</div>
+      <h1>Churn involuntário: o cliente que sai só porque o cartão venceu</h1>
+    </div>
+  </div>
+  <article class="prose wrap-narrow">
     <p>Existe um tipo de cancelamento que não aparece no seu radar e não tem nada a ver com satisfação: o cliente gostava do serviço, queria continuar, mas saiu porque o cartão dele venceu e a cobrança parou de passar. É o churn involuntário, e ele corrói a receita em silêncio, mês após mês, sem que ninguém perceba.</p>
 
     <h2>O que é churn involuntário</h2>
@@ -47,10 +66,14 @@
     <p>Se o cartão não tem conserto no momento, oferecer Pix ou boleto na hora segura o cliente que ia escapar. Dar uma alternativa imediata transforma uma assinatura perdida em pagamento recebido.</p>
 
     <p>No nfchat o combate ao churn involuntário é automático: a cobrança recusada é reprocessada sozinha, o cliente recebe aviso por e-mail, WhatsApp e SMS com link para atualizar o pagamento, e há sempre Pix e boleto como alternativa. Integramos com todas as instituições bancárias e os principais gateways (Asaas, Cielo, GetNet), então você recupera receita que estava escapando sem perceber e libera o time financeiro — tudo num lugar só.</p>
-    <a class="cta" href="/#planos">Começar teste grátis →</a>
+    <a class="cta" href="../../#planos">Começar teste grátis →</a>
   </article>
 </main>
-<footer><div class="wrap">© <span id="y"></span> nfchat</div></footer>
-<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<footer>
+  <div class="wrap">
+    <div class="foot-bottom" style="margin-top:0;padding-top:0;border-top:0"><a class="logo" href="../../">nf<b>chat</b></a><span><a href="../">Blog</a> · <a href="../../#planos">Planos</a> · © <span id="y"></span> nfchat</span></div>
+  </div>
+</footer>
+<script src="../../assets/site.js"></script>
 </body>
 </html>

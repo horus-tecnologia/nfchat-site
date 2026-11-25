@@ -5,27 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cobrança humanizada: tom certo em cada etapa — nfchat</title>
 <meta name="description" content="O tom de voz ideal em cada fase da cobrança para recuperar pagando sem desgaste.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{--brand:#4f46e5;--ink:#0f172a;--muted:#64748b;--line:#e7e9f2}
-  *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);line-height:1.7}
-  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
-  header{border-bottom:1px solid var(--line)}nav{display:flex;justify-content:space-between;align-items:center;height:66px}
-  .logo{font-weight:800;font-size:20px}.logo span{color:var(--brand)}a{color:inherit;text-decoration:none}
-  .date{color:var(--brand);font-weight:600;font-size:13px;margin-top:40px}
-  h1{font-size:34px;letter-spacing:-1px;margin:8px 0 10px;line-height:1.15}
-  h2{font-size:22px;margin:34px 0 8px}
-  p{margin:0 0 16px}article{padding-bottom:40px}
-  .cta{display:inline-block;background:var(--brand);color:#fff;font-weight:600;padding:12px 22px;border-radius:12px;margin-top:10px}
-  footer{color:var(--muted);font-size:14px;padding:30px 0;border-top:1px solid var(--line)}
-</style>
+<meta name="theme-color" content="#FC6901">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-<header><div class="wrap"><nav><a class="logo" href="/">nf<span>chat</span></a><a href="/blog/">← Blog</a></nav></div></header>
-<main class="wrap">
-  <article>
-    <div class="date">8 de outubro de 2026</div>
-    <h1>Cobrança humanizada: tom certo em cada etapa</h1>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="../../" aria-label="nfchat — início">nf<b>chat</b></a>
+    <nav class="menu" aria-label="Principal">
+      <a href="../../#beneficios">Plataforma</a>
+      <a href="../../#como">Como funciona</a>
+      <a href="../../#recuperacao">Recuperação</a>
+      <a href="../../#planos">Planos</a>
+      <a href="../" aria-current="page">Blog</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-primary btn-sm" href="../../#planos">Começar grátis</a>
+      <button class="burger" aria-label="Abrir menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="drawer" aria-label="Menu móvel">
+    <a href="../../#beneficios">Plataforma</a>
+    <a href="../../#como">Como funciona</a>
+    <a href="../../#recuperacao">Recuperação</a>
+    <a href="../../#planos">Planos</a>
+    <a href="../">Blog</a>
+  </nav>
+</header>
+<main>
+  <div class="article-head">
+    <div class="wrap-narrow">
+      <a class="back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Blog</a>
+      <div class="date">8 de outubro de 2026</div>
+      <h1>Cobrança humanizada: tom certo em cada etapa</h1>
+    </div>
+  </div>
+  <article class="prose wrap-narrow">
     <p>A mesma dívida pode ser cobrada de um jeito que recupera o valor e mantém o cliente, ou de um jeito que recebe uma vez e perde a conta para sempre. A diferença raramente está no que você cobra, está no tom com que cobra. Cobrança humanizada não é ser mole, é escolher as palavras certas para cada momento do atraso, e isso tem impacto direto no resultado.</p>
 
     <h2>Humanizar não é deixar de cobrar</h2>
@@ -46,10 +65,14 @@
     <p>Em qualquer etapa, feche oferecendo solução, não beco. Propor acordo, parcelamento ou um prazo transforma a mensagem de ataque em convite a resolver. O cliente que enxerga saída negocia; o que se sente encurralado some. A porta de saída é o que converte a conversa em pagamento.</p>
 
     <p>Acertar o tom em cada etapa exige consistência que o improviso não entrega. O nfchat estrutura a régua inteira com a mensagem certa no momento certo, do lembrete leve à cobrança firme, direto no WhatsApp e com pagamento multi-gateway como Asaas, Cielo e GetNet, tudo num lugar só. Sua equipe financeira recupera com padrão e tom humano, sem depender do humor de quem está cobrando.</p>
-    <a class="cta" href="/#planos">Começar teste grátis →</a>
+    <a class="cta" href="../../#planos">Começar teste grátis →</a>
   </article>
 </main>
-<footer><div class="wrap">© <span id="y"></span> nfchat</div></footer>
-<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<footer>
+  <div class="wrap">
+    <div class="foot-bottom" style="margin-top:0;padding-top:0;border-top:0"><a class="logo" href="../../">nf<b>chat</b></a><span><a href="../">Blog</a> · <a href="../../#planos">Planos</a> · © <span id="y"></span> nfchat</span></div>
+  </div>
+</footer>
+<script src="../../assets/site.js"></script>
 </body>
 </html>

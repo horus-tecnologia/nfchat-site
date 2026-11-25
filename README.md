@@ -6,7 +6,8 @@ Site institucional/comercial (landing + blog) do nfchat. Estático, servido por 
 
 ## Estrutura
 - `index.html` — landing (hero, como funciona, benefícios, planos, FAQ, CTA).
-- `blog/` — blog (listagem + posts em `blog/posts/`). Novos posts entram **via PR** (ver abaixo).
+- `assets/` — `site.css` (identidade visual única: paleta laranja do portal nfchat, tipografia e componentes), `site.js` e favicon. Landing, blog e posts usam esta mesma folha.
+- `blog/` — blog (listagem + posts em `blog/posts/`). Novos posts entram **via PR** (ver abaixo). Post novo = copiar a estrutura de um post existente (sem `<style>` próprio; links relativos `../../`).
 - `Dockerfile` — imagem nginx com o site.
 - `.github/workflows/deploy.yml` — build + push da imagem no **GHCR** e **deploy pela pipeline** (job `deploy` em runner self-hosted no servidor: `docker compose pull` + `up -d`).
 - `docker-compose.yml` — serviço do site (sem Watchtower; a atualização é feita pela pipeline).
