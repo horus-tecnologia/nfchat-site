@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cobrança por uso (metered billing): quando faz sentido — nfchat</title>
+<meta name="description" content="O que é cobrança por uso, para quais negócios funciona e como implementar sem complicar.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--brand:#4f46e5;--ink:#0f172a;--muted:#64748b;--line:#e7e9f2}
+  *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);line-height:1.7}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+  header{border-bottom:1px solid var(--line)}nav{display:flex;justify-content:space-between;align-items:center;height:66px}
+  .logo{font-weight:800;font-size:20px}.logo span{color:var(--brand)}a{color:inherit;text-decoration:none}
+  .date{color:var(--brand);font-weight:600;font-size:13px;margin-top:40px}
+  h1{font-size:34px;letter-spacing:-1px;margin:8px 0 10px;line-height:1.15}
+  h2{font-size:22px;margin:34px 0 8px}
+  p{margin:0 0 16px}article{padding-bottom:40px}
+  .cta{display:inline-block;background:var(--brand);color:#fff;font-weight:600;padding:12px 22px;border-radius:12px;margin-top:10px}
+  footer{color:var(--muted);font-size:14px;padding:30px 0;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav><a class="logo" href="/">nf<span>chat</span></a><a href="/blog/">← Blog</a></nav></div></header>
+<main class="wrap">
+  <article>
+    <div class="date">1 de novembro de 2026</div>
+    <h1>Cobrança por uso (metered billing): quando faz sentido</h1>
+    <p>Nem todo negócio cabe numa mensalidade fixa. Quando o valor que o cliente extrai varia muito de um mês para o outro, cobrar sempre o mesmo valor frustra uns e subcobra outros. É aí que entra a cobrança por uso: você fatura pelo que foi efetivamente consumido. Mas ela não serve para todo mundo.</p>
+
+    <h2>O que é cobrança por uso</h2>
+    <p>Na cobrança por uso, ou metered billing, o valor da fatura acompanha o consumo do período: quantidade de requisições, volume processado, usuários ativos, mensagens enviadas, o que for a sua unidade de medida. Em vez de um preço fixo, o cliente paga proporcional ao que usou.</p>
+    <p>O modelo alinha o preço ao valor entregue, o que costuma soar mais justo para quem oscila bastante de um mês para o outro.</p>
+
+    <h2>Para quais negócios funciona</h2>
+    <p>Faz sentido quando o uso varia e é mensurável de forma confiável: APIs, infraestrutura em nuvem, plataformas de comunicação, serviços que processam volume. Nesses casos, a conta sobe e desce junto com a atividade do cliente.</p>
+    <p>Também ajuda a baixar a barreira de entrada: o cliente começa pagando pouco e cresce o gasto só quando cresce o uso.</p>
+
+    <h2>Quando é melhor evitar</h2>
+    <p>Se o seu valor é estável e previsível, a mensalidade fixa é mais simples para os dois lados. Cobrança por uso em cima de algo que quase não varia só adiciona complexidade sem benefício.</p>
+    <p>Ela também assusta quem precisa de previsão de custo. Uma conta que pode disparar sem aviso gera ansiedade e pode travar a adoção.</p>
+
+    <h2>Modelos híbridos costumam vencer</h2>
+    <p>Na prática, o que mais funciona é misturar: uma base fixa que garante previsibilidade mais um componente por uso para o excedente. Assim você tem receita recorrente estável e ainda captura o valor de quem usa muito.</p>
+
+    <h2>Como implementar sem complicar</h2>
+    <p>O risco do modelo é operacional. Medir o uso, fechar o período, calcular a fatura e cobrar sem erro exige um sistema que faça essa ponte sozinho. Fatura inconsistente em cobrança por uso quebra a confiança na hora, porque o cliente não entende de onde veio o número.</p>
+
+    <p>No nfchat você monta cobrança fixa, por uso ou híbrida e deixa a fatura ser gerada e cobrada automaticamente a cada ciclo, com a nota fiscal emitida junto. Integramos com todas as instituições bancárias e os principais gateways (Asaas, Cielo, GetNet), com Pix, boleto e cartão e régua de lembretes. Sem planilha para fechar no fim do mês e com o time financeiro livre do cálculo manual — tudo num lugar só.</p>
+    <a class="cta" href="/#planos">Começar teste grátis →</a>
+  </article>
+</main>
+<footer><div class="wrap">© <span id="y"></span> nfchat</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

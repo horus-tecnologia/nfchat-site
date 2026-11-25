@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conciliação entre cobrança, recebimento e nota fiscal — nfchat</title>
+<meta name="description" content="Como conciliar cobrança, recebimento e NF para fechar o mês sem planilhas e sem furos.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--brand:#4f46e5;--ink:#0f172a;--muted:#64748b;--line:#e7e9f2}
+  *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);line-height:1.7}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+  header{border-bottom:1px solid var(--line)}nav{display:flex;justify-content:space-between;align-items:center;height:66px}
+  .logo{font-weight:800;font-size:20px}.logo span{color:var(--brand)}a{color:inherit;text-decoration:none}
+  .date{color:var(--brand);font-weight:600;font-size:13px;margin-top:40px}
+  h1{font-size:34px;letter-spacing:-1px;margin:8px 0 10px;line-height:1.15}
+  h2{font-size:22px;margin:34px 0 8px}
+  p{margin:0 0 16px}article{padding-bottom:40px}
+  .cta{display:inline-block;background:var(--brand);color:#fff;font-weight:600;padding:12px 22px;border-radius:12px;margin-top:10px}
+  footer{color:var(--muted);font-size:14px;padding:30px 0;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav><a class="logo" href="/">nf<span>chat</span></a><a href="/blog/">← Blog</a></nav></div></header>
+<main class="wrap">
+  <article>
+    <div class="date">14 de setembro de 2026</div>
+    <h1>Conciliação entre cobrança, recebimento e nota fiscal</h1>
+    <p>Todo fim de mês a mesma cena: alguém abre três planilhas lado a lado para descobrir se o que foi cobrado foi recebido e se gerou nota. É um trabalho de detetive que não deveria existir. Conciliar cobrança, recebimento e NF não precisa ser uma maratona de fim de mês, desde que os três conversem desde o começo.</p>
+
+    <h2>Os três lados que precisam bater</h2>
+    <p>Em qualquer empresa de recorrência há três registros de um mesmo fato: a cobrança (o que você pediu), o recebimento (o que entrou) e a nota fiscal (o que você documentou). Conciliar é garantir que esses três contem a mesma história para cada cliente, em cada ciclo.</p>
+    <p>Quando qualquer um dos três mora em um sistema separado, conciliar vira cópia manual, e cópia manual vira erro.</p>
+
+    <h2>Onde o descasamento aparece</h2>
+    <p>Os furos clássicos são sempre os mesmos: cobrança paga sem nota emitida, nota emitida sem pagamento confirmado, valor recebido diferente do cobrado por causa de juros ou desconto, e pagamento que entrou mas ninguém baixou. Cada um desses, sozinho, parece pequeno; somados, bagunçam o fechamento inteiro.</p>
+    <p>O problema é que eles só aparecem quando você cruza os dados, e se esse cruzamento é manual, é fácil deixar passar.</p>
+
+    <h2>Por que a planilha não escala</h2>
+    <p>A planilha funciona com dez clientes. Com cem, ela vira risco: a cada mês mais linhas, mais colagens, mais chance de uma fórmula quebrada passar despercebida. Pior, ela não avisa quando algo não bate; só mostra o que você lembrou de conferir.</p>
+    <p>Conforme a base cresce, o custo de conciliar na mão cresce junto, e a confiança no número final cai.</p>
+
+    <h2>Conciliação contínua, não de fim de mês</h2>
+    <p>A virada de chave é parar de conciliar uma vez por mês e passar a conciliar continuamente. Se cada pagamento já atualiza o status da cobrança e dispara a nota correspondente, no fim do mês não há o que reconstruir: só o que revisar.</p>
+    <p>A conciliação deixa de ser um evento e vira um estado do sistema. Você consulta, em vez de montar.</p>
+
+    <h2>O que você ganha com os três no mesmo lugar</h2>
+    <p>Com cobrança, recebimento e nota na mesma base, o descasamento fica visível na hora: dá para ver na mesma tela o que foi cobrado, o que caiu e o que foi documentado. Em vez de procurar o erro, o sistema aponta a exceção para você tratar.</p>
+    <p>Isso também dá segurança para a apuração fiscal, já que a receita documentada corresponde à receita efetivamente registrada. Os critérios de reconhecimento específicos, claro, devem ser alinhados com seu contador.</p>
+
+    <p>É isso que o nfchat entrega: cobrança, recebimento e emissão de nota fiscal no mesmo fluxo, conciliados automaticamente a cada pagamento. Sem três planilhas, sem furos escondidos, o fechamento do mês vira uma revisão rápida em vez de uma investigação.</p>
+    <a class="cta" href="/#planos">Começar teste grátis →</a>
+  </article>
+</main>
+<footer><div class="wrap">© <span id="y"></span> nfchat</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
