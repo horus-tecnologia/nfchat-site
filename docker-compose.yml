@@ -1,12 +1,10 @@
 # Deploy independente do SITE (mesmo servidor Linux dos demais projetos nfchat).
-# Cada projeto tem seu próprio compose e seu Watchtower COM ESCOPO, então as
-# atualizações são independentes (um não mexe no container do outro).
+# Cada projeto tem seu próprio compose -> atualização independente.
+# A atualização é feita PELA PIPELINE (job deploy): `docker compose pull` + `up -d`.
+# Sem Watchtower.
 #
-# Uso no servidor:
-#   docker login ghcr.io            # (uma vez; PAT com read:packages se a imagem for privada)
-#   docker compose up -d
-# A cada push na main, a Action publica ghcr.io/horus-tecnologia/nfchat-site:latest
-# e o Watchtower (abaixo) detecta e atualiza só este serviço.
+# No servidor (uma vez): docker login ghcr.io  &&  docker compose -p nfchat-site up -d
+# Depois: a cada push na main, a Action publica a imagem e roda o deploy aqui.
 
 services:
   nfchat-site:
@@ -14,19 +12,4 @@ services:
     container_name: nfchat-site
     restart: unless-stopped
     ports:
-      - "8083:80"           # site -> http://<host>:8083  (proxy reverso cuida do domínio depois)
-    labels:
-      - "com.centurylinklabs.watchtower.scope=nfchat-site"
-
-  watchtower:
-    image: containrrr/watchtower
-    container_name: nfchat-site-watchtower
-    restart: unless-stopped
-    command: --interval 180 --cleanup --scope nfchat-site
-    environment:
-      - WATCHTOWER_SCOPE=nfchat-site
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${HOME}/.docker/config.json:/config.json:ro   # auth do GHCR p/ imagem privada
-    labels:
-      - "com.centurylinklabs.watchtower.scope=nfchat-site"
+      - "8083:80"           # site -> http://<host>:8083 (proxy reverso cuida do domínio)

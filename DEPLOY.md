@@ -1,14 +1,15 @@
-# Deploy automatizado — nfchat-site (padrão nfchat)
+# Deploy automatizado — padrão nfchat (estilo odinchat-webhook)
 
-Fluxo: **push na `main` → GitHub Actions builda a imagem → publica no GHCR → Watchtower no servidor Linux atualiza sozinho.**
+O **pipeline faz o deploy** (push, não polling). Sem Watchtower.
 
-## Pipeline (CI)
-- `.github/workflows/docker-publish.yml` builda e publica `ghcr.io/horus-tecnologia/nfchat-site:latest` a cada push na `main` (e `:vX.Y.Z` em tags).
-- Usa o `GITHUB_TOKEN` (permissão `packages: write`) — não precisa de segredo extra.
+```
+push na main
+   └─ job build  (runner GitHub)  -> builda a imagem -> publica no GHCR (ghcr.io/horus-tecnologia/<repo>)
+   └─ job deploy (runner self-hosted no servidor Linux) -> docker compose pull + up -d (recria containers)
+```
 
-## Servidor Linux (CD)
-Todos os projetos nfchat convivem no **mesmo host**, cada um com seu `docker-compose.yml` e seu
-Watchtower **com escopo** (atualização independente). Portas sugeridas:
+## Servidor Linux (uma vez)
+Todos os projetos nfchat convivem no **mesmo host**, cada um com seu `docker-compose.yml` (atualização independente). Portas:
 
 | Projeto | Porta host |
 |---|---|
@@ -17,21 +18,25 @@ Watchtower **com escopo** (atualização independente). Portas sugeridas:
 | nfchat-sales-app | 8082 |
 | nfchat-site | 8083 |
 
-### Primeira vez
+### 1. Runner self-hosted (uma vez por servidor)
+Registrar um GitHub Actions self-hosted runner no servidor, com os labels `self-hosted, linux, nfchat`
+(em *Settings → Actions → Runners* de cada repo, ou um runner compartilhado na org):
 ```bash
-# 1. Docker + compose plugin instalados
-# 2. Login no GHCR (PAT com read:packages, se a imagem for privada)
-echo $GHCR_PAT | docker login ghcr.io -u <usuario> --password-stdin
-# 3. Subir este projeto
-git clone https://github.com/horus-tecnologia/nfchat-site.git
-cd nfchat-site
-docker compose up -d
+# no servidor, conforme instruções do GitHub (./config.sh ... --labels nfchat)
+# deixar como serviço: ./svc.sh install && ./svc.sh start
 ```
 
-### Depois
-Nada manual: a cada push na `main`, a imagem nova sobe no GHCR e o Watchtower (intervalo 180s)
-troca o container automaticamente. Para forçar: `docker compose pull && docker compose up -d`.
+### 2. Login no GHCR + subir uma vez
+```bash
+echo $GHCR_PAT | docker login ghcr.io -u <usuario> --password-stdin
+git clone https://github.com/horus-tecnologia/nfchat-site.git /opt/nfchat/nfchat-site
+cd /opt/nfchat/nfchat-site && docker compose -p nfchat-site up -d
+```
 
-### Proxy reverso (opcional, recomendado)
-Um nginx/Traefik na frente mapeia os domínios para as portas (ex.: `www → :8083`, `app → :8081`,
-`api → :8080`). Fica a critério da infra.
+### 3. Depois
+Nada manual: cada push na `main` builda a imagem e o job `deploy` (no runner self-hosted) roda
+`docker compose pull` + `up -d`, recriando o container com a nova imagem.
+Rollback: `docker compose -p nfchat-site pull <tag-antiga>` ou reexecutar um run anterior.
+
+## Proxy reverso (opcional)
+nginx/Traefik na frente mapeando domínios → portas (ex.: `www → :8083`).

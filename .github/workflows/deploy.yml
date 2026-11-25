@@ -1,0 +1,67 @@
+name: Build & Deploy (site)
+
+# Padrão nfchat (estilo odinchat-webhook): o PIPELINE faz o deploy.
+#   build  -> builda a imagem e publica no GHCR
+#   deploy -> runner self-hosted no servidor Linux faz `docker compose pull` + recria os containers
+# Sem Watchtower: a atualização só acontece quando a pipeline roda o deploy.
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      build_only:
+        description: "Só buildar e publicar a imagem — não toca no servidor"
+        type: boolean
+        default: false
+
+concurrency:
+  group: nfchat-site-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Login no GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Metadados / tags
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short
+      - name: Build e push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    needs: build
+    if: ${{ inputs.build_only != true }}
+    # Runner self-hosted registrado no servidor Linux com estes labels.
+    runs-on: [ self-hosted, linux, nfchat ]
+    steps:
+      - uses: actions/checkout@v4            # traz o docker-compose.yml deste repo
+      - name: Login no GHCR (servidor)
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Pull da imagem + recriar containers
+        run: |
+          docker compose -p nfchat-site pull
+          docker compose -p nfchat-site up -d --remove-orphans
+      - name: Limpeza de imagens antigas
+        run: docker image prune -f
