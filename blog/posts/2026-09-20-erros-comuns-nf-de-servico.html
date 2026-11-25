@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Erros comuns na emissão de nota fiscal de serviço — nfchat</title>
+<meta name="description" content="Os erros mais frequentes na NFS-e e como evitá-los para não ter dor de cabeça fiscal.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--brand:#4f46e5;--ink:#0f172a;--muted:#64748b;--line:#e7e9f2}
+  *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);line-height:1.7}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+  header{border-bottom:1px solid var(--line)}nav{display:flex;justify-content:space-between;align-items:center;height:66px}
+  .logo{font-weight:800;font-size:20px}.logo span{color:var(--brand)}a{color:inherit;text-decoration:none}
+  .date{color:var(--brand);font-weight:600;font-size:13px;margin-top:40px}
+  h1{font-size:34px;letter-spacing:-1px;margin:8px 0 10px;line-height:1.15}
+  h2{font-size:22px;margin:34px 0 8px}
+  p{margin:0 0 16px}article{padding-bottom:40px}
+  .cta{display:inline-block;background:var(--brand);color:#fff;font-weight:600;padding:12px 22px;border-radius:12px;margin-top:10px}
+  footer{color:var(--muted);font-size:14px;padding:30px 0;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav><a class="logo" href="/">nf<span>chat</span></a><a href="/blog/">← Blog</a></nav></div></header>
+<main class="wrap">
+  <article>
+    <div class="date">20 de setembro de 2026</div>
+    <h1>Erros comuns na emissão de nota fiscal de serviço</h1>
+    <p>A NFS-e parece simples até o dia em que o contador devolve a lista de notas com problema. Como cada prefeitura tem suas próprias regras, os erros de emissão de nota de serviço são repetitivos e previsíveis, o que é uma boa notícia: dá para evitar quase todos antes que virem retificação. Veja os que mais aparecem.</p>
+
+    <h2>Descrição do serviço vaga ou errada</h2>
+    <p>Descrição genérica como "serviços prestados" é um clássico. Além de dificultar o entendimento do cliente, ela pode conflitar com o código de serviço informado e com o enquadramento no ISS do município.</p>
+    <p>Descreva o que foi efetivamente prestado, de forma consistente com o código escolhido. Padronize isso para que toda nota saia igual e correta, em vez de depender da memória de quem emite.</p>
+
+    <h2>Código de serviço e enquadramento no ISS</h2>
+    <p>Escolher o código errado muda a forma como o imposto é tratado e pode gerar recolhimento a menor ou a maior. Como a lista e as alíquotas de ISS variam conforme o município, não existe um número único válido para todo mundo.</p>
+    <p>Defina o enquadramento certo junto com seu contador uma vez e reaproveite. O erro aqui costuma ser silencioso: só aparece quando a prefeitura cruza os dados.</p>
+
+    <h2>Dados do tomador incompletos ou desatualizados</h2>
+    <p>CNPJ errado, endereço antigo, inscrição municipal faltando. Dados do tomador desatualizados travam a emissão ou geram nota que não bate com o cadastro da prefeitura. Em serviços recorrentes, um cadastro desatualizado se repete mês após mês.</p>
+    <p>Mantenha o cadastro do cliente como fonte única e confira antes do primeiro faturamento, não depois do erro.</p>
+
+    <h2>Retenções tratadas de qualquer jeito</h2>
+    <p>Dependendo do tomador e do serviço, pode haver retenção de tributos na nota. Tratar isso "no olho" gera divergência entre o valor cobrado, o valor líquido e o que foi recolhido.</p>
+    <p>Retenção é um tema que varia conforme o caso e deve ser confirmado com o contador. O importante é ter uma regra definida e aplicá-la sempre, nunca improvisar nota a nota.</p>
+
+    <h2>Emitir fora da hora: antes ou depois demais</h2>
+    <p>Emitir a nota muito antes do serviço ou esquecer de emitir no período correto bagunça a competência e o fechamento. Em cobrança recorrente, o volume faz com que uma nota esquecida passe despercebida até o fim do mês.</p>
+    <p>Ter o gatilho de emissão amarrado ao evento certo, como o pagamento ou o período da assinatura, evita tanto o adiantamento quanto o atraso.</p>
+
+    <h2>Digitar duas vezes: a raiz de quase tudo</h2>
+    <p>A maioria desses erros tem a mesma origem: alguém copia os dados da cobrança para o portal de emissão à mão. Cada digitação é uma chance de trocar valor, cliente ou data. Quando a nota é gerada a partir dos dados que já existem, metade dos problemas simplesmente não acontece.</p>
+
+    <p>No nfchat, a NFS-e é emitida a partir da própria cobrança: mesmos dados, mesmo cliente, mesmo valor, sem segunda digitação. Com cobrança, recebimento e nota no mesmo lugar, você chega ao fechamento do mês sem a lista de notas para retificar.</p>
+    <a class="cta" href="/#planos">Começar teste grátis →</a>
+  </article>
+</main>
+<footer><div class="wrap">© <span id="y"></span> nfchat</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
